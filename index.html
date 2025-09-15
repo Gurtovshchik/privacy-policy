@@ -25,13 +25,15 @@
       // Определяем язык браузера
       const userLang = navigator.language || navigator.userLanguage;
       let file = "privacy_policy_en.md"; // по умолчанию английский
-
-      if (userLang.toLowerCase().startsWith("ru")) {
-        file = "privacy_policy_ru.md";
-      }
-      // В будущем можно добавить другие языки:
-      // if (userLang.startsWith("fr")) file = "privacy_policy_fr.md";
-
+      if (userLang.toLowerCase().startsWith("ru")) file = "privacy_policy_ru.md";
+      else if (userLang.toLowerCase().startsWith("zh")) file = "privacy_policy_zh-CN.md";
+      else if (userLang.toLowerCase().startsWith("es")) file = "privacy_policy_es.md";
+      else if (userLang.toLowerCase().startsWith("pt")) file = "privacy_policy_pt-BR.md";
+      else if (userLang.toLowerCase().startsWith("de")) file = "privacy_policy_de.md";
+      else if (userLang.toLowerCase().startsWith("fr")) file = "privacy_policy_fr.md";
+      else if (userLang.toLowerCase().startsWith("ar")) file = "privacy_policy_ar.md";
+      else if (userLang.toLowerCase().startsWith("id")) file = "privacy_policy_id.md";
+      else if (userLang.toLowerCase().startsWith("it")) file = "privacy_policy_it.md";
       try {
         const response = await fetch(file);
         const text = await response.text();
