@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Privacy Policy</title>
+  <style>
+    body {
+      max-width: 800px;
+      margin: 40px auto;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      padding: 0 20px;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+  <h1>Privacy Policy</h1>
+  <div id="content">Loading...</div>
+
+  <script>
+    async function loadPolicy() {
+      // Определяем язык браузера
+      const userLang = navigator.language || navigator.userLanguage;
+      let file = "privacy_policy_en.md"; // по умолчанию английский
+
+      if (userLang.toLowerCase().startsWith("ru")) {
+        file = "privacy_policy_ru.md";
+      }
+      // В будущем можно добавить другие языки:
+      // if (userLang.startsWith("fr")) file = "privacy_policy_fr.md";
+
+      try {
+        const response = await fetch(file);
+        const text = await response.text();
+        document.getElementById("content").innerHTML = marked.parse(text);
+      } catch (err) {
+        document.getElementById("content").innerHTML =
+          "Failed to load privacy policy.";
+      }
+    }
+
+    // Подключаем Markdown парсер
+    const script = document.createElement("script");
+    script.src =
+      "https://cdn.jsdelivr.net/npm/marked/marked.min.js";
+    script.onload = loadPolicy;
+    document.head.appendChild(script);
+  </script>
+</body>
+</html>
